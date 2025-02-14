@@ -5,11 +5,12 @@ Library    SeleniumLibrary
 ### Hooks
 Open the browser
     Open Browser        ${URL}      ${BROWSER}
-    #Maximize Browser Window
+    Set Window Size     1200    800
 
 ### Steps test scenario
 Given I am in the home page
     Execute JavaScript    window.location.href='/home'
+    Click Element 	 id:onetrust-accept-btn-handler
 
 When I search for the item "${product}"
     Input Text    id:input-busca    ${product}
@@ -18,6 +19,7 @@ When I search for the item "${product}"
     Wait Until Element Is Visible    xpath=//article[contains(@class, 'productCard')][1]
 
 And I select the first product from the list
+    Scroll Element Into View    xpath=//article[contains(@class, 'productCard')][1]
     Click Element    xpath=//article[contains(@class, 'productCard')][1]
 
 And I enter a CEP code and validate the available shipping options
@@ -28,17 +30,24 @@ And I close the shipping options window
     Click Element    xpath=//div[@role="dialog"]/button[@aria-label="Fechar"]
 
 And I click on Buy
-    Execute JavaScript    window.scrollTo(0,500)
-    Click Element    xpath=//button[contains(text(),'COMPRAR')]
+    ${url}=   Get Location
+    ${PRODUCT_CODE}  Set Variable    ${url.split('/')[4]}
+    Set Test Variable       ${PRODUCT_CODE}
+
+    ${PRODUCT_NAME}  Get Text  xpath=//div[@id='container-purchase']//h1
+    Set Test Variable       ${PRODUCT_NAME}
+
+    Execute JavaScript    document.evaluate("//button[contains(text(),'COMPRAR')]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
+    wait until location is    ${URL[:24]}/precarrinho/${PRODUCT_CODE}/0
 
 And I select the additional 12-month warranty
     Click Element    xpath=//span[contains(text(),"12 Meses de garantia")]/../../../input[@name="garantia"]
 
 And I click on "Go to the cart"
-    Click Element    xpath=//span[contains(text(), 'Adicionar serviços')]/../../button
+    Execute JavaScript    document.evaluate("//span[contains(text(), 'Adicionar serviços')]/../../button", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
 
 Then I should see the correct product added to the cart
-    Element Should Contain    xpath=//div[@data-smarthintproductid="658786"]    MacBook Pro Apple 14", M4 Pro, CPU 14 Núcleos, GPU 20 Núcleos, Neural Engine de 16 Núcleos, 24GB RAM, SSD 1TB, Preto-espacial - MX2J3BZ/A
+    Element Should Contain    xpath=//div[@data-smarthintproductid="${PRODUCT_CODE}"]    ${PRODUCT_NAME}
 
 Close Browser
     Close Browser

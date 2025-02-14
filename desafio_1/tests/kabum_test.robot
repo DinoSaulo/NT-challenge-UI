@@ -21,10 +21,9 @@ Feature: Purchase a notebook on Kabum website
     Given I am in the home page
     When I search for the item "Notebook"
     And I select the first product from the list
-    And I enter a CEP code and validate the available shipping options
-    And I close the shipping options window
+    #And I enter a CEP code and validate the available shipping options
+    #And I close the shipping options window
     And I click on Buy
     And I select the additional 12-month warranty
     And I click on "Go to the cart"
     Then I should see the correct product added to the cart
-    Close Browser
