@@ -1,14 +1,11 @@
 # NT-challenge
 
-
-##
-
 <!--- Utilizando o exemplos do repositório https://github.com/iuricode/readme-template para esse README.md --->
 
 ###  📝 Ferramentas utilizadas
-| Linguagem     | Framework             | Ferramenta de Gerenciamento | Navegador       |
-|---------------|-----------------------|-----------------------------|-----------------|
-| Python        | RobotFramework v7.2.2 | PIP v25.0.1                 | Electron v106   |
+| Linguagem     | Framework             | Ferramenta de Gerenciamento | Navegador               |
+|---------------|-----------------------|-----------------------------|-------------------------|
+| Python        | RobotFramework v7.2.2 | PIP v25.0.1                 | Chrome v131.0.6778.265  |
 
 ## 💻 Pré-requisitos
 
