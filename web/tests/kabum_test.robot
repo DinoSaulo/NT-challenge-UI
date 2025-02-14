@@ -19,7 +19,7 @@ Test Setup      Open the browser
 *** Test Cases ***
 Feature: Purchase a notebook on Kabum website
     Given I am in the home page
-    When I search for the term "Notebook"
+    When I search for the item "Notebook"
     And I select the first product from the list
     And I enter a CEP code and validate the available shipping options
     And I close the shipping options window

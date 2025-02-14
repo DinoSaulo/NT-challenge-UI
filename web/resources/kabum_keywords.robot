@@ -11,7 +11,7 @@ Open the browser
 Given I am in the home page
     Execute JavaScript    window.location.href='/home'
 
-When I search for the term "${product}"
+When I search for the item "${product}"
     Input Text    id:input-busca    ${product}
     Press Keys    id:input-busca    ENTER
     
